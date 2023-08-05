@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  database:
+    container_name: restaurant-pg
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: backend
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./api/internal/app/postgres-data:/var/lib/postgresql/data
+      - ./api/data/migrations/init.sql:/docker-entrypoint-initdb.d/init.sql
+  server:
+    container_name: restaurant-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    links:
+      - database
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
