@@ -25,6 +25,15 @@ func NewUserRouter(r user.UserHandler) *UserRouter {
 	}
 }
 
+func (r UserRouter) adminRoutes() http.Handler {
+	//Middleware with access rules for router.
+	mux := chi.NewRouter()
+	mux.Use(authentication.AuthRequired)
+	mux.Get("/users", r.handler.List())
+
+	return mux
+}
+
 // Routes: Router of users
 func (r UserRouter) routes() http.Handler {
 	r.router.Use(middleware.Recoverer)
@@ -34,18 +43,8 @@ func (r UserRouter) routes() http.Handler {
 	r.router.Get("/refresh", r.handler.RefreshToken())
 	r.router.Get("/logout", r.handler.Logout())
 
-	r.router.Route("/owner", func(mux chi.Router) {
-		mux.Use(authentication.AuthRequired)
-
-		// r.router.Get("/menus", app.MovieCatalog)
-	})
-
-	r.router.Get("/users", r.handler.List())
-	r.router.Post("/users", r.handler.Get())
-	r.router.Post("/users/id", r.handler.GetByID())
-	// r.router.Post("/invite", r.handler.CreateFriendship())
-	// r.router.Post("/subscribe", r.handler.CreateSubscribe())
-	// r.router.Post("/blocks", r.handler.CreateBlock())
+	// PROTECTED
+	r.router.Mount("/admin", r.adminRoutes())
 
 	return r.router
 }
