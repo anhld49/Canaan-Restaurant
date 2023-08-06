@@ -16,4 +16,10 @@ const (
 	CreateMenu  = `insert into public.menu (restaurant_id, name, created_at, updated_at) values ($1, $2, $3, $4) returning id`
 	UpdateMenu  = `update public.menu set restaurant_id = $1, name = $2, updated_at = $3 where id = $4 returning id`
 	DeleteMenu  = `delete from public.menu where id = $1 returning id`
+
+	GetAllDishs = `select id, menu_id, name, price, created_at, updated_at from public."dish" r order by id`
+	GetDishByID = `select id, menu_id, name, price, created_at, updated_at from public."dish" r where id = $1`
+	CreateDish  = `insert into public.dish (menu_id, name, price, created_at, updated_at) values ($1, $2, $3, $4, $5) returning id`
+	UpdateDish  = `update public.dish set menu_id = $1, name = $2, price = $3, updated_at = $4 where id = $5 returning id`
+	DeleteDish  = `delete from public.dish where id = $1 returning id`
 )

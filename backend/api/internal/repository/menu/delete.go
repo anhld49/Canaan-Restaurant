@@ -31,7 +31,7 @@ func (repo *MenuRepository) Delete(id int) error {
 	)
 
 	if err != nil || original.ID == 0 {
-		return errors.New(constants.UNKNOWN_RESTAURANT)
+		return errors.New(constants.UNKNOWN_MENU)
 	}
 
 	query := constants.DeleteMenu

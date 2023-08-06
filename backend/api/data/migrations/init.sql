@@ -146,6 +146,13 @@ ALTER TABLE public.dish ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 );
 
 --
+-- Data for Name: dish; Type: TABLE DATA; Schema: public; Owner: -
+--
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (1, 'Menu 1', 3.00, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (2, 'Menu 2', 5.00, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (3, 'Menu 3', 7.00, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+
+--
 -- Name: order; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE public.order (

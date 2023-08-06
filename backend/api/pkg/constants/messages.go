@@ -17,4 +17,10 @@ const (
 	UPDATE_MENU_SUCCESSFULLY = "Menu was updated successfully"
 	DELETE_MENU_SUCCESSFULLY = "Menu was deleted successfully"
 	UNKNOWN_MENU             = "Unknown Menu"
+
+	// Dish
+	CREATE_DISH_SUCCESSFULLY = "Dish was created successfully"
+	UPDATE_DISH_SUCCESSFULLY = "Dish was updated successfully"
+	DELETE_DISH_SUCCESSFULLY = "Dish was deleted successfully"
+	UNKNOWN_DISH             = "Unknown Dish"
 )
