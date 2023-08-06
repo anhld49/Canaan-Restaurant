@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/golang-jwt/jwt/v4"
 
 	"backend/api/internal/handler/rest/public/middleware/authentication"
@@ -175,14 +176,14 @@ func (handler UserHandler) Get() (handlerFn http.HandlerFunc) {
 // Get: Get single user by id
 func (handler UserHandler) GetByID() (handlerFn http.HandlerFunc) {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		requestPayload := IdRequestPayload{}
-		err := utils.ReadJSON(w, r, &requestPayload)
+		paramId := chi.URLParam(r, "id")
+		id, err := strconv.Atoi(paramId)
 		if err != nil {
-			utils.ErrorJSON(w, err, http.StatusBadRequest)
+			utils.ErrorJSON(w, err)
 			return
 		}
 
-		user, err := handler.controller.GetByID(requestPayload.Id)
+		user, err := handler.controller.GetByID(id)
 
 		resp := presenter.User{
 			ID:        user.ID,

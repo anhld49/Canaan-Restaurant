@@ -11,9 +11,12 @@ import (
 	pkgErr "github.com/pkg/errors"
 
 	"backend/api/internal/app/db"
-	controller "backend/api/internal/controller/user"
-	handler "backend/api/internal/handler/rest/public/user"
-	repository "backend/api/internal/repository/user"
+	restaurantController "backend/api/internal/controller/restaurant"
+	userController "backend/api/internal/controller/user"
+	restaurantHandler "backend/api/internal/handler/rest/public/restaurant"
+	userHandler "backend/api/internal/handler/rest/public/user"
+	restaurantRepository "backend/api/internal/repository/restaurant"
+	userRepository "backend/api/internal/repository/user"
 	"backend/api/pkg/constants"
 )
 
@@ -31,15 +34,20 @@ func main() {
 }
 
 func initServer(conn *sql.DB) {
-	userRepo := repository.NewUserRepo(conn)
-	userController := controller.NewUserController(userRepo)
-	userHandler := handler.NewUserHandler(*userController)
-	userRouter := NewUserRouter(*userHandler)
+	userRepo := userRepository.NewUserRepo(conn)
+	userController := userController.NewUserController(userRepo)
+	userHandler := userHandler.NewUserHandler(*userController)
+
+	restaurantRepo := restaurantRepository.NewRestaurantRepo(conn)
+	restaurantController := restaurantController.NewRestaurantController(restaurantRepo)
+	restaurantHandler := restaurantHandler.NewRestaurantHandler(*restaurantController)
+
+	router := NewRouter(*userHandler, *restaurantHandler)
 
 	log.Println("Starting application on port", os.Getenv(constants.API_PORT))
 
 	// start a web server
-	if err := http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv(constants.API_PORT)), userRouter.routes()); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv(constants.API_PORT)), router.routes()); err != nil {
 		log.Fatal(pkgErr.WithStack(err))
 	}
 }

@@ -7,41 +7,47 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 
 	"backend/api/internal/handler/rest/public/middleware/authentication"
+	"backend/api/internal/handler/rest/public/restaurant"
 	"backend/api/internal/handler/rest/public/user"
 )
 
-// UserRouter: User Router
-type UserRouter struct {
-	handler user.UserHandler
-	router  *chi.Mux
+type Router struct {
+	userHandler       user.UserHandler
+	restaurantHandler restaurant.RestaurantHandler
+	router            *chi.Mux
 }
 
-// NewUserRouter: create new user Router
-func NewUserRouter(r user.UserHandler) *UserRouter {
+// NewRouter: create new Router
+func NewRouter(r user.UserHandler, res restaurant.RestaurantHandler) *Router {
 	router := chi.NewRouter()
-	return &UserRouter{
-		handler: r,
-		router:  router,
+	return &Router{
+		userHandler:       r,
+		restaurantHandler: res,
+		router:            router,
 	}
 }
 
-func (r UserRouter) adminRoutes() http.Handler {
+func (r Router) adminRoutes() http.Handler {
 	//Middleware with access rules for router.
 	mux := chi.NewRouter()
 	mux.Use(authentication.AuthRequired)
-	mux.Get("/users", r.handler.List())
+	mux.Get("/users", r.userHandler.List())
+	mux.Post("/users", r.userHandler.Get())
+	mux.Get("/users/{id}", r.userHandler.GetByID())
+	mux.Get("/restaurants", r.restaurantHandler.List())
+	mux.Get("/restaurants/{id}", r.restaurantHandler.Get())
 
 	return mux
 }
 
 // Routes: Router of users
-func (r UserRouter) routes() http.Handler {
+func (r Router) routes() http.Handler {
 	r.router.Use(middleware.Recoverer)
 	r.router.Use(authentication.EnableCORS)
 
-	r.router.Post("/authenticate", r.handler.Authenticate())
-	r.router.Get("/refresh", r.handler.RefreshToken())
-	r.router.Get("/logout", r.handler.Logout())
+	r.router.Post("/authenticate", r.userHandler.Authenticate())
+	r.router.Get("/refresh", r.userHandler.RefreshToken())
+	r.router.Get("/logout", r.userHandler.Logout())
 
 	// PROTECTED
 	r.router.Mount("/admin", r.adminRoutes())
