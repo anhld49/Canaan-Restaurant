@@ -12,25 +12,25 @@ type Reader interface {
 }
 
 // Writer user writer
-// type Writer interface {
-// 	CreateFriendship(email string, friend string) (mod.UserResponse, error)
-// 	CreateSubscribe(requestor string, target string) (mod.UserResponse, error)
-// 	CreateBlock(requestor string, target string) error
-// }
+type Writer interface {
+	Create(models.Restaurant) (models.Restaurant, error)
+	Update(models.Restaurant) (models.Restaurant, error)
+	Delete(id int) error
+}
 
 // RestaurantControllerInterface interface
 type RestaurantControllerInterface interface {
 	Reader
-	// Writer
+	Writer
 }
 
 // RestaurantController: Restaurant Controller
 type RestaurantController struct {
-	restaurantRepo restaurant.Repository
+	restaurantRepo restaurant.RestaurantRepository
 }
 
 // NewRestaurantController: Create new Restaurant Controller
-func NewRestaurantController(r restaurant.Repository) *RestaurantController {
+func NewRestaurantController(r restaurant.RestaurantRepository) *RestaurantController {
 	return &RestaurantController{
 		restaurantRepo: r,
 	}

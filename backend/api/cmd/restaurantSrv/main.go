@@ -39,7 +39,7 @@ func initServer(conn *sql.DB) {
 	userHandler := userHandler.NewUserHandler(*userController)
 
 	restaurantRepo := restaurantRepository.NewRestaurantRepo(conn)
-	restaurantController := restaurantController.NewRestaurantController(restaurantRepo)
+	restaurantController := restaurantController.NewRestaurantController(*restaurantRepo)
 	restaurantHandler := restaurantHandler.NewRestaurantHandler(*restaurantController)
 
 	router := NewRouter(*userHandler, *restaurantHandler)

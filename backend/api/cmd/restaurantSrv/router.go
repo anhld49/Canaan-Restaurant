@@ -34,8 +34,12 @@ func (r Router) adminRoutes() http.Handler {
 	mux.Get("/users", r.userHandler.List())
 	mux.Post("/users", r.userHandler.Get())
 	mux.Get("/users/{id}", r.userHandler.GetByID())
-	mux.Get("/restaurants", r.restaurantHandler.List())
-	mux.Get("/restaurants/{id}", r.restaurantHandler.Get())
+
+	// mux.Get("/restaurants", r.restaurantHandler.List())
+	// mux.Get("/restaurants/{id}", r.restaurantHandler.Get())
+	// mux.Put("/restaurants", r.restaurantHandler.Create())
+	// mux.Patch("/restaurants/{id}", r.restaurantHandler.Update())
+	// mux.Delete("/restaurants/{id}", r.restaurantHandler.Delete())
 
 	return mux
 }
@@ -48,6 +52,12 @@ func (r Router) routes() http.Handler {
 	r.router.Post("/authenticate", r.userHandler.Authenticate())
 	r.router.Get("/refresh", r.userHandler.RefreshToken())
 	r.router.Get("/logout", r.userHandler.Logout())
+
+	r.router.Get("/restaurants", r.restaurantHandler.List())
+	r.router.Get("/restaurants/{id}", r.restaurantHandler.Get())
+	r.router.Put("/restaurants", r.restaurantHandler.Create())
+	r.router.Patch("/restaurants/{id}", r.restaurantHandler.Update())
+	r.router.Delete("/restaurants/{id}", r.restaurantHandler.Delete())
 
 	// PROTECTED
 	r.router.Mount("/admin", r.adminRoutes())

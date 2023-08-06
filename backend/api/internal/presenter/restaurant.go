@@ -13,6 +13,12 @@ type Restaurant struct {
 }
 
 type RestaurantResponse struct {
+	Success    bool       `json:"success"`
+	Message    string     `json:"message"`
+	Restaurant Restaurant `json:"restaurant"`
+}
+
+type DeleteRestaurantResponse struct {
 	Success bool   `json:"success"`
 	Message string `json:"message"`
 }
