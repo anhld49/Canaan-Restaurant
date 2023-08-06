@@ -6,6 +6,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 
+	"backend/api/internal/handler/rest/public/menu"
 	"backend/api/internal/handler/rest/public/middleware/authentication"
 	"backend/api/internal/handler/rest/public/restaurant"
 	"backend/api/internal/handler/rest/public/user"
@@ -14,15 +15,17 @@ import (
 type Router struct {
 	userHandler       user.UserHandler
 	restaurantHandler restaurant.RestaurantHandler
+	menuHandler       menu.MenuHandler
 	router            *chi.Mux
 }
 
 // NewRouter: create new Router
-func NewRouter(r user.UserHandler, res restaurant.RestaurantHandler) *Router {
+func NewRouter(r user.UserHandler, res restaurant.RestaurantHandler, me menu.MenuHandler) *Router {
 	router := chi.NewRouter()
 	return &Router{
 		userHandler:       r,
 		restaurantHandler: res,
+		menuHandler:       me,
 		router:            router,
 	}
 }
@@ -58,6 +61,12 @@ func (r Router) routes() http.Handler {
 	r.router.Put("/restaurants", r.restaurantHandler.Create())
 	r.router.Patch("/restaurants/{id}", r.restaurantHandler.Update())
 	r.router.Delete("/restaurants/{id}", r.restaurantHandler.Delete())
+
+	r.router.Get("/menus", r.menuHandler.List())
+	r.router.Get("/menus/{id}", r.menuHandler.Get())
+	r.router.Put("/menus", r.menuHandler.Create())
+	r.router.Patch("/menus/{id}", r.menuHandler.Update())
+	r.router.Delete("/menus/{id}", r.menuHandler.Delete())
 
 	// PROTECTED
 	r.router.Mount("/admin", r.adminRoutes())

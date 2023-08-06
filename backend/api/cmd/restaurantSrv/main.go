@@ -11,11 +11,17 @@ import (
 	pkgErr "github.com/pkg/errors"
 
 	"backend/api/internal/app/db"
+
+	menuController "backend/api/internal/controller/menu"
+	menuHandler "backend/api/internal/handler/rest/public/menu"
+	menuRepository "backend/api/internal/repository/menu"
+
 	restaurantController "backend/api/internal/controller/restaurant"
-	userController "backend/api/internal/controller/user"
 	restaurantHandler "backend/api/internal/handler/rest/public/restaurant"
-	userHandler "backend/api/internal/handler/rest/public/user"
 	restaurantRepository "backend/api/internal/repository/restaurant"
+
+	userController "backend/api/internal/controller/user"
+	userHandler "backend/api/internal/handler/rest/public/user"
 	userRepository "backend/api/internal/repository/user"
 	"backend/api/pkg/constants"
 )
@@ -42,7 +48,11 @@ func initServer(conn *sql.DB) {
 	restaurantController := restaurantController.NewRestaurantController(*restaurantRepo)
 	restaurantHandler := restaurantHandler.NewRestaurantHandler(*restaurantController)
 
-	router := NewRouter(*userHandler, *restaurantHandler)
+	menuRepo := menuRepository.NewMenuRepo(conn)
+	menuController := menuController.NewMenuController(*menuRepo)
+	menuHandler := menuHandler.NewMenuHandler(*menuController)
+
+	router := NewRouter(*userHandler, *restaurantHandler, *menuHandler)
 
 	log.Println("Starting application on port", os.Getenv(constants.API_PORT))
 
