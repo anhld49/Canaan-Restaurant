@@ -7,7 +7,7 @@ import (
 // Order: responsible for represent Order entity
 type Order struct {
 	ID        int
-	MenuId    int
+	UserId    int
 	DriverId  int
 	Amount    float64
 	CreatedAt time.Time

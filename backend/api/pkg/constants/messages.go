@@ -23,4 +23,9 @@ const (
 	UPDATE_DISH_SUCCESSFULLY = "Dish was updated successfully"
 	DELETE_DISH_SUCCESSFULLY = "Dish was deleted successfully"
 	UNKNOWN_DISH             = "Unknown Dish"
+
+	// Order
+	CREATE_ORDER_SUCCESSFULLY = "Order was created successfully"
+	DELETE_ORDER_SUCCESSFULLY = "Order was deleted successfully"
+	UNKNOWN_ORDER             = "Unknown Order"
 )

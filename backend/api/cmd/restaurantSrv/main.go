@@ -12,6 +12,10 @@ import (
 
 	"backend/api/internal/app/db"
 
+	orderController "backend/api/internal/controller/order"
+	orderHandler "backend/api/internal/handler/rest/public/order"
+	orderRepository "backend/api/internal/repository/order"
+
 	dishController "backend/api/internal/controller/dish"
 	dishHandler "backend/api/internal/handler/rest/public/dish"
 	dishRepository "backend/api/internal/repository/dish"
@@ -60,7 +64,11 @@ func initServer(conn *sql.DB) {
 	dishController := dishController.NewDishController(*dishRepo)
 	dishHandler := dishHandler.NewDishHandler(*dishController)
 
-	router := NewRouter(*userHandler, *restaurantHandler, *menuHandler, *dishHandler)
+	orderRepo := orderRepository.NewOrderRepo(conn)
+	orderController := orderController.NewOrderController(*orderRepo)
+	orderHandler := orderHandler.NewOrderHandler(*orderController)
+
+	router := NewRouter(*userHandler, *restaurantHandler, *menuHandler, *dishHandler, *orderHandler)
 
 	log.Println("Starting application on port", os.Getenv(constants.API_PORT))
 

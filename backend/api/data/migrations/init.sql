@@ -25,7 +25,7 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.user (
-    id integer PRIMARY KEY NOT NULL,
+    id  SERIAL PRIMARY KEY,
     first_name character varying(255),
     last_name character varying(255),
     email character varying(255),
@@ -33,19 +33,6 @@ CREATE TABLE public.user (
     role character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
-);
-
---
--- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-ALTER TABLE public.user ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.user_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
 );
 
 --
@@ -61,25 +48,12 @@ insert into public.user (first_name, last_name, email, password, role, created_a
 -- Name: restaurant; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE public.restaurant (
-    id integer PRIMARY KEY NOT NULL,
+    id  SERIAL PRIMARY KEY,
     owner_id INTEGER REFERENCES public.user(id) ON DELETE CASCADE,
     name character varying(255),
     address character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
-);
-
---
--- Name: restaurant_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-ALTER TABLE public.restaurant ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.restaurant_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
 );
 
 --
@@ -93,24 +67,11 @@ insert into public.restaurant (owner_id, name, address, created_at, updated_at) 
 -- Name: menu; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE public.menu (
-    id integer PRIMARY KEY NOT NULL,
+    id  SERIAL PRIMARY KEY,
     restaurant_id INTEGER REFERENCES public.restaurant(id) ON DELETE CASCADE,
     name character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
-);
-
---
--- Name: menu_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-ALTER TABLE public.menu ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.menu_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
 );
 
 --
@@ -124,25 +85,12 @@ insert into public.menu (restaurant_id, name, created_at, updated_at) values (1,
 -- Name: dish; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE public.dish (
-    id integer PRIMARY KEY NOT NULL,
+    id  SERIAL PRIMARY KEY,
     menu_id INTEGER REFERENCES public.menu(id) ON DELETE CASCADE,
     name character varying(255),
     price NUMERIC(10, 2) NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
-);
-
---
--- Name: dish_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-ALTER TABLE public.dish ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.dish_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
 );
 
 --
@@ -156,27 +104,20 @@ insert into public.dish (menu_id, name, price, created_at, updated_at) values (3
 -- Name: order; Type: TABLE; Schema: public; Owner: -
 --
 CREATE TABLE public.order (
-    id integer PRIMARY KEY NOT NULL,
+    id  SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES public.user(id) ON DELETE CASCADE,
     driver_id INTEGER REFERENCES public.user(id) ON DELETE CASCADE,
     amount NUMERIC(10, 2) NOT NULL,
-    status character varying(255) NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
 
 --
--- Name: order_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Data for Name: order; Type: TABLE DATA; Schema: public; Owner: -
 --
-
-ALTER TABLE public.order ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.order_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
+insert into public.order (user_id, driver_id, amount, created_at, updated_at) values (1, 2, 9.99, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.order (user_id, driver_id, amount, created_at, updated_at) values (1, 2, 11.99, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.order (user_id, driver_id, amount, created_at, updated_at) values (1, 2, 13.99, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
 
 CREATE TABLE public.order_dish (
     order_id INTEGER REFERENCES public.order(id) ON DELETE CASCADE,
@@ -185,3 +126,10 @@ CREATE TABLE public.order_dish (
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
+
+--
+-- Data for Name: order_dish; Type: TABLE DATA; Schema: public; Owner: -
+--
+insert into public.order_dish (order_id, dish_id, quantity, created_at, updated_at) values (1, 1, 3, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.order_dish (order_id, dish_id, quantity, created_at, updated_at) values (1, 2, 5, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.order_dish (order_id, dish_id, quantity, created_at, updated_at) values (1, 3, 7, '2021-09-23 00:00:00', '2021-09-23 00:00:00');

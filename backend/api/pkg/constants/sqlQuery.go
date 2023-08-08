@@ -22,4 +22,13 @@ const (
 	CreateDish  = `insert into public.dish (menu_id, name, price, created_at, updated_at) values ($1, $2, $3, $4, $5) returning id`
 	UpdateDish  = `update public.dish set menu_id = $1, name = $2, price = $3, updated_at = $4 where id = $5 returning id`
 	DeleteDish  = `delete from public.dish where id = $1 returning id`
+
+	CreateOrderInit       = `insert into public.order (user_id, driver_id, amount, created_at, updated_at) values ($1, $2, 0.00, $3, $4) returning id`
+	CreateOrderDish       = `insert into public.order_dish (order_id, dish_id, quantity, created_at, updated_at) values ($1, $2, $3, $4, $5)`
+	GetDishPriceByDishId  = `select price from public.dish where id = $1`
+	InsertAmountIntoOrder = `update public.order set amount = $1 where id = $2`
+	GetOrderByID          = `select id, user_id, driver_id, amount, created_at, updated_at from public. order where id = $1`
+	GetOrderDishByOrderId = `select dish_id, quantity from public.order_dish where order_id = $1`
+	DeleteOrder           = `delete from public.order where id = $1 returning id`
+	GetAllOrders          = `select id, user_id, driver_id, amount, created_at, updated_at from public. order where user_id = $1`
 )

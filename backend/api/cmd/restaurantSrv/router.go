@@ -9,6 +9,7 @@ import (
 	"backend/api/internal/handler/rest/public/dish"
 	"backend/api/internal/handler/rest/public/menu"
 	"backend/api/internal/handler/rest/public/middleware/authentication"
+	"backend/api/internal/handler/rest/public/order"
 	"backend/api/internal/handler/rest/public/restaurant"
 	"backend/api/internal/handler/rest/public/user"
 )
@@ -18,17 +19,19 @@ type Router struct {
 	restaurantHandler restaurant.RestaurantHandler
 	menuHandler       menu.MenuHandler
 	dishHandler       dish.DishHandler
+	orderHandler      order.OrderHandler
 	router            *chi.Mux
 }
 
 // NewRouter: create new Router
-func NewRouter(r user.UserHandler, res restaurant.RestaurantHandler, me menu.MenuHandler, di dish.DishHandler) *Router {
+func NewRouter(r user.UserHandler, res restaurant.RestaurantHandler, me menu.MenuHandler, di dish.DishHandler, or order.OrderHandler) *Router {
 	router := chi.NewRouter()
 	return &Router{
 		userHandler:       r,
 		restaurantHandler: res,
 		menuHandler:       me,
 		dishHandler:       di,
+		orderHandler:      or,
 		router:            router,
 	}
 }
@@ -41,11 +44,10 @@ func (r Router) adminRoutes() http.Handler {
 	mux.Post("/users", r.userHandler.Get())
 	mux.Get("/users/{id}", r.userHandler.GetByID())
 
-	// mux.Get("/restaurants", r.restaurantHandler.List())
-	// mux.Get("/restaurants/{id}", r.restaurantHandler.Get())
-	// mux.Put("/restaurants", r.restaurantHandler.Create())
-	// mux.Patch("/restaurants/{id}", r.restaurantHandler.Update())
-	// mux.Delete("/restaurants/{id}", r.restaurantHandler.Delete())
+	mux.Get("/orders", r.orderHandler.List())
+	mux.Get("/orders/{id}", r.orderHandler.Get())
+	mux.Put("/orders", r.orderHandler.Create())
+	mux.Delete("/orders/{id}", r.orderHandler.Delete())
 
 	return mux
 }
