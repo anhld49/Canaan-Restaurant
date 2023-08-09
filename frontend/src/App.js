@@ -128,7 +128,7 @@ function App() {
                     to="/admin/orders/create"
                     className="list-group-item list-group-item-action"
                   >
-                    Create Order
+                    Create Dishes
                   </Link>
                 </>
               )}

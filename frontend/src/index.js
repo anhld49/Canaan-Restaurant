@@ -5,7 +5,8 @@ import App from './App';
 import OrderList from './components/OrderList';
 import ErrorPage from './components/ErrorPage';
 import Genres from './components/Genres';
-import GraphQL from './components/GraphQL';
+import CreateDish from './components/CreateDish';
+import UpdateDish from './components/UpdateDish';
 import Home from './components/Home';
 import Login from './components/Login';
 import Restaurants from './components/Restaurants';
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
         element: <Dishes />,
       },
       {
+        path: "/dishes/update/:id",
+        element: <UpdateDish />,
+      },
+      {
         path: "/genres",
         element: <Genres />,
       },
@@ -45,8 +50,8 @@ const router = createBrowserRouter([
         element: <OrderDetails />,
       },
       {
-        path: "/graphql",
-        element: <GraphQL />,
+        path: "/admin/orders/create",
+        element: <CreateDish />,
       },
       {
         path: "/login",

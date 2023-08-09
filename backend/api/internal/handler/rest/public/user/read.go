@@ -59,6 +59,19 @@ func (handler UserHandler) Authenticate() (handlerFn http.HandlerFunc) {
 	})
 }
 
+func (handler UserHandler) AuthorizationRequired(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		userId := authentication.GetUserIdFromToken(r)
+		user, err := handler.controller.GetByID(userId)
+
+		if err != nil || user.Role != constants.OWNER {
+			w.WriteHeader(http.StatusForbidden)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
+}
+
 // RefreshToken: Generate a RefreshToken
 func (handler UserHandler) RefreshToken() (handlerFn http.HandlerFunc) {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

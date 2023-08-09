@@ -13,6 +13,36 @@ const Dishes = () => {
   const { jwtToken } = useOutletContext();
   const navigate = useNavigate();
 
+  const updateDish = (updateId) => {
+    console.log("updateId", updateId)
+    navigate(`/dishes/update/${updateId}`);
+  }
+
+  const deleteDish = (deletedId) => {
+    if (jwtToken === "") {
+      navigate("/login");
+      return;
+    }
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + jwtToken);
+
+    const requestOptions = {
+      method: "DELETE",
+      headers: headers,
+    };
+
+    fetch(`/owner/dishes/${deletedId}`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        alert("order deleted successfully");
+        navigate(`/dishes/${id}`);
+      })
+      .catch((err) => {
+        alert("order deleted failed", err);
+      });
+  }
+
   const createOrder = () => {
     if (jwtToken === "") {
       navigate("/login");
@@ -119,6 +149,20 @@ const Dishes = () => {
                   onClick={() => addToCart(`${m.id}`)}
                 >
                   Add To Cart
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => updateDish(`${m.id}`)}
+                >
+                  Update this Dish
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => deleteDish(`${m.id}`)}
+                >
+                  Delete this Dish
                 </button>
               </td>
             </tr>

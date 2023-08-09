@@ -52,6 +52,19 @@ func (r Router) adminRoutes() http.Handler {
 	return mux
 }
 
+func (r Router) ownerRoutes() http.Handler {
+	//Middleware with access rules for router.
+	mux := chi.NewRouter()
+	mux.Use(authentication.AuthRequired)
+	mux.Use(r.userHandler.AuthorizationRequired)
+
+	mux.Put("/dishes", r.dishHandler.Create())
+	mux.Patch("/dishes/{id}", r.dishHandler.Update())
+	mux.Delete("/dishes/{id}", r.dishHandler.Delete())
+
+	return mux
+}
+
 // Routes: Router of users
 func (r Router) routes() http.Handler {
 	r.router.Use(middleware.Recoverer)
@@ -77,12 +90,10 @@ func (r Router) routes() http.Handler {
 	r.router.Get("/dishes", r.dishHandler.List())
 	r.router.Get("/dishes/{id}", r.dishHandler.Get())
 	r.router.Get("/dishes/getDishesByMenuId/{id}", r.dishHandler.GetDishesByMenuId())
-	r.router.Put("/dishes", r.dishHandler.Create())
-	r.router.Patch("/dishes/{id}", r.dishHandler.Update())
-	r.router.Delete("/dishes/{id}", r.dishHandler.Delete())
 
 	// PROTECTED
 	r.router.Mount("/admin", r.adminRoutes())
+	r.router.Mount("/owner", r.ownerRoutes())
 
 	return r.router
 }

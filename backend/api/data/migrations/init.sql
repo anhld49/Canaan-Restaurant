@@ -39,9 +39,9 @@ CREATE TABLE public.user (
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: -
 --
 -- password: secret
-insert into public.user (first_name, last_name, email, password, role, created_at, updated_at) values ('Owner', 'Boss', 'owner@example.com', '$2a$14$wVsaPvJnJJsomWArouWCtusem6S/.Gauq/GjOIEHpyh2DAMmso1wy', 'OWNER', '2021-09-23 00:00:00', '2021-09-23 00:00:00');
-insert into public.user (first_name, last_name, email, password, role, created_at, updated_at) values ('Driver', 'Employee', 'driver@example.com', '$2a$14$wVsaPvJnJJsomWArouWCtusem6S/.Gauq/GjOIEHpyh2DAMmso1wy', 'DRIVER', '2022-09-23 00:00:00', '2022-09-23 00:00:00');
-insert into public.user (first_name, last_name, email, password, role, created_at, updated_at) values ('User', 'Customer', 'user@example.com', '$2a$14$wVsaPvJnJJsomWArouWCtusem6S/.Gauq/GjOIEHpyh2DAMmso1wy', 'USER', '2023-09-23 00:00:00', '2023-09-23 00:00:00');
+insert into public.user (first_name, last_name, email, password, role, created_at, updated_at) values ('OWNER', 'Boss', 'owner@example.com', '$2a$14$wVsaPvJnJJsomWArouWCtusem6S/.Gauq/GjOIEHpyh2DAMmso1wy', 'OWNER', '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+insert into public.user (first_name, last_name, email, password, role, created_at, updated_at) values ('DRIVER', 'Employee', 'driver@example.com', '$2a$14$wVsaPvJnJJsomWArouWCtusem6S/.Gauq/GjOIEHpyh2DAMmso1wy', 'DRIVER', '2022-09-23 00:00:00', '2022-09-23 00:00:00');
+insert into public.user (first_name, last_name, email, password, role, created_at, updated_at) values ('USER', 'Customer', 'user@example.com', '$2a$14$wVsaPvJnJJsomWArouWCtusem6S/.Gauq/GjOIEHpyh2DAMmso1wy', 'USER', '2023-09-23 00:00:00', '2023-09-23 00:00:00');
 
 
 --
@@ -81,13 +81,13 @@ insert into public.menu (restaurant_id, name, created_at, updated_at) values (1,
 insert into public.menu (restaurant_id, name, created_at, updated_at) values (1, 'Menu 2', '2020-09-23 00:00:00', '2020-09-23 00:00:00');
 insert into public.menu (restaurant_id, name, created_at, updated_at) values (1, 'Menu 3', '2021-09-23 00:00:00', '2021-09-23 00:00:00');
 
-insert into public.menu (restaurant_id, name, created_at, updated_at) values (2, 'Menu 1', '2019-09-23 00:00:00', '2019-09-23 00:00:00');
-insert into public.menu (restaurant_id, name, created_at, updated_at) values (2, 'Menu 2', '2020-09-23 00:00:00', '2020-09-23 00:00:00');
-insert into public.menu (restaurant_id, name, created_at, updated_at) values (2, 'Menu 3', '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (2, 'Menu 4', '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (2, 'Menu 5', '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (2, 'Menu 6', '2021-09-23 00:00:00', '2021-09-23 00:00:00');
 
-insert into public.menu (restaurant_id, name, created_at, updated_at) values (3, 'Menu 1', '2019-09-23 00:00:00', '2019-09-23 00:00:00');
-insert into public.menu (restaurant_id, name, created_at, updated_at) values (3, 'Menu 2', '2020-09-23 00:00:00', '2020-09-23 00:00:00');
-insert into public.menu (restaurant_id, name, created_at, updated_at) values (3, 'Menu 3', '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (3, 'Menu 7', '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (3, 'Menu 8', '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (3, 'Menu 9', '2021-09-23 00:00:00', '2021-09-23 00:00:00');
 
 --
 -- Name: dish; Type: TABLE; Schema: public; Owner: -
