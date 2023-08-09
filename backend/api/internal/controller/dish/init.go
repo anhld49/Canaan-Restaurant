@@ -9,6 +9,7 @@ import (
 type Reader interface {
 	List() ([]models.Dish, error)
 	Get(id int) (models.Dish, error)
+	GetDishesByMenuId(id int) ([]models.Dish, error)
 }
 
 // Writer user writer

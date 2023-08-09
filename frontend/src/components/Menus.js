@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
-const Movies = () => {
-    const [movies, setMovies] = useState([]);
+const Menus = () => {
+    const [menus, setMenus] = useState([]);
+    let { id } = useParams();
 
     useEffect( () => {
         const headers = new Headers();
@@ -13,10 +14,10 @@ const Movies = () => {
             headers: headers,
         }
 
-        fetch(`http://localhost:8080/movies`, requestOptions)
+        fetch(`http://localhost:8080/menus/getMenuByRestaurantId/${id}`, requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                setMovies(data);
+                setMenus(data);
             })
             .catch(err => {
                 console.log(err);
@@ -26,26 +27,24 @@ const Movies = () => {
 
     return(
         <div>
-            <h2>Movies</h2>
+            <h2>Menus</h2>
             <hr />
             <table className="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Movie</th>
-                        <th>Release Date</th>
-                        <th>Rating</th>
+                        <th>Index</th>
+                        <th>Name</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {movies.map((m) => (
+                    {menus.map((m) => (
                         <tr key={m.id}>
                             <td>
-                                <Link to={`/movies/${m.id}`}>
-                                    {m.title}
+                                <Link to={`/dishes/${m.id}`}>
+                                    {m.id}
                                 </Link>
                             </td>
-                            <td>{m.release_date}</td>
-                            <td>{m.mpaa_rating}</td>
+                            <td>{m.name}</td>
                         </tr>    
                     ))}
                 </tbody>
@@ -54,4 +53,4 @@ const Movies = () => {
     )
 }
 
-export default Movies;
+export default Menus;

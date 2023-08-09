@@ -60,3 +60,33 @@ func (handler MenuHandler) Get() (handlerFn http.HandlerFunc) {
 		utils.WriteJSON(w, http.StatusOK, resp)
 	})
 }
+
+// GetMenuByRestaurantId: Get Menu By Restaurant Id
+func (handler MenuHandler) GetMenuByRestaurantId() (handlerFn http.HandlerFunc) {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		paramId := chi.URLParam(r, "id")
+		id, err := strconv.Atoi(paramId)
+		if err != nil {
+			utils.ErrorJSON(w, err)
+			return
+		}
+
+		data, err := handler.controller.GetMenuByRestaurantId(id)
+		if err != nil {
+			utils.ErrorJSON(w, err)
+			return
+		}
+		var menus []presenter.Menu
+		for _, d := range data {
+			menus = append(menus, presenter.Menu{
+				ID:           d.ID,
+				RestaurantId: d.RestaurantId,
+				Name:         d.Name,
+				CreatedAt:    d.CreatedAt,
+				UpdatedAt:    d.UpdatedAt,
+			})
+		}
+
+		utils.WriteJSON(w, http.StatusOK, menus)
+	})
+}

@@ -62,3 +62,34 @@ func (handler DishHandler) Get() (handlerFn http.HandlerFunc) {
 		utils.WriteJSON(w, http.StatusOK, resp)
 	})
 }
+
+// GetDishesByMenuId: Get Dishes By Menu Id
+func (handler DishHandler) GetDishesByMenuId() (handlerFn http.HandlerFunc) {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		paramId := chi.URLParam(r, "id")
+		id, err := strconv.Atoi(paramId)
+		if err != nil {
+			utils.ErrorJSON(w, err)
+			return
+		}
+
+		data, err := handler.controller.GetDishesByMenuId(id)
+		if err != nil {
+			utils.ErrorJSON(w, err)
+			return
+		}
+		var dishs []presenter.Dish
+		for _, d := range data {
+			dishs = append(dishs, presenter.Dish{
+				ID:        d.ID,
+				MenuId:    d.MenuId,
+				Name:      d.Name,
+				Price:     d.Price,
+				CreatedAt: d.CreatedAt,
+				UpdatedAt: d.UpdatedAt,
+			})
+		}
+
+		utils.WriteJSON(w, http.StatusOK, dishs)
+	})
+}

@@ -37,3 +37,14 @@ func (c DishController) Get(id int) (models.Dish, error) {
 
 	return data, nil
 }
+
+// GetDishesByMenuId: Get Dishes By Menu Id
+func (c DishController) GetDishesByMenuId(id int) ([]models.Dish, error) {
+	data, err := c.dishRepo.GetDishesByMenuId(id)
+
+	if err != nil {
+		return data, err
+	}
+
+	return data, nil
+}

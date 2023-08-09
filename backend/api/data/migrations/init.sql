@@ -81,6 +81,14 @@ insert into public.menu (restaurant_id, name, created_at, updated_at) values (1,
 insert into public.menu (restaurant_id, name, created_at, updated_at) values (1, 'Menu 2', '2020-09-23 00:00:00', '2020-09-23 00:00:00');
 insert into public.menu (restaurant_id, name, created_at, updated_at) values (1, 'Menu 3', '2021-09-23 00:00:00', '2021-09-23 00:00:00');
 
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (2, 'Menu 1', '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (2, 'Menu 2', '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (2, 'Menu 3', '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (3, 'Menu 1', '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (3, 'Menu 2', '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.menu (restaurant_id, name, created_at, updated_at) values (3, 'Menu 3', '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+
 --
 -- Name: dish; Type: TABLE; Schema: public; Owner: -
 --
@@ -96,9 +104,41 @@ CREATE TABLE public.dish (
 --
 -- Data for Name: dish; Type: TABLE DATA; Schema: public; Owner: -
 --
-insert into public.dish (menu_id, name, price, created_at, updated_at) values (1, 'Menu 1', 3.00, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
-insert into public.dish (menu_id, name, price, created_at, updated_at) values (2, 'Menu 2', 5.00, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
-insert into public.dish (menu_id, name, price, created_at, updated_at) values (3, 'Menu 3', 7.00, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (1, 'Dish 1', 3.00, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (1, 'Dish 2', 5.00, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (1, 'Dish 3', 7.00, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (2, 'Dish 4', 3.00, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (2, 'Dish 5', 5.00, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (2, 'Dish 6', 7.00, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (3, 'Dish 7', 3.00, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (3, 'Dish 8', 5.00, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (3, 'Dish 9', 7.00, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (4, 'Dish 10', 3.00, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (4, 'Dish 11', 5.00, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (4, 'Dish 12', 7.00, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (5, 'Dish 13', 3.00, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (5, 'Dish 14', 5.00, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (5, 'Dish 15', 7.00, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (6, 'Dish 16', 3.00, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (6, 'Dish 17', 5.00, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (6, 'Dish 18', 7.00, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (7, 'Dish 19', 3.00, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (7, 'Dish 20', 5.00, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (7, 'Dish 21', 7.00, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (8, 'Dish 22', 3.00, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (8, 'Dish 23', 5.00, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (8, 'Dish 24', 7.00, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
+
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (9, 'Dish 25', 3.00, '2019-09-23 00:00:00', '2019-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (9, 'Dish 26', 5.00, '2020-09-23 00:00:00', '2020-09-23 00:00:00');
+insert into public.dish (menu_id, name, price, created_at, updated_at) values (9, 'Dish 27', 7.00, '2021-09-23 00:00:00', '2021-09-23 00:00:00');
 
 --
 -- Name: order; Type: TABLE; Schema: public; Owner: -

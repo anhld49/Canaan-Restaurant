@@ -69,12 +69,14 @@ func (r Router) routes() http.Handler {
 
 	r.router.Get("/menus", r.menuHandler.List())
 	r.router.Get("/menus/{id}", r.menuHandler.Get())
+	r.router.Get("/menus/getMenuByRestaurantId/{id}", r.menuHandler.GetMenuByRestaurantId())
 	r.router.Put("/menus", r.menuHandler.Create())
 	r.router.Patch("/menus/{id}", r.menuHandler.Update())
 	r.router.Delete("/menus/{id}", r.menuHandler.Delete())
 
 	r.router.Get("/dishes", r.dishHandler.List())
 	r.router.Get("/dishes/{id}", r.dishHandler.Get())
+	r.router.Get("/dishes/getDishesByMenuId/{id}", r.dishHandler.GetDishesByMenuId())
 	r.router.Put("/dishes", r.dishHandler.Create())
 	r.router.Patch("/dishes/{id}", r.dishHandler.Update())
 	r.router.Delete("/dishes/{id}", r.dishHandler.Delete())

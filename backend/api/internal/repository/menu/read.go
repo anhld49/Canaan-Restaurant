@@ -76,3 +76,41 @@ func (repo *MenuRepository) Get(id int) (models.Menu, error) {
 	return menu, nil
 
 }
+
+// GetMenuByRestaurantId: Ge tMenu By Restaurant Id
+func (repo *MenuRepository) GetMenuByRestaurantId(id int) ([]models.Menu, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
+	defer cancel()
+
+	query := constants.GetMenuByRestaurantId
+
+	rows, err := repo.db.QueryContext(ctx, query, id)
+
+	log.Println("GetMenuByRestaurantId: ", query)
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var menus []models.Menu
+
+	for rows.Next() {
+		var menu models.Menu
+		err := rows.Scan(
+			&menu.ID,
+			&menu.RestaurantId,
+			&menu.Name,
+			&menu.CreatedAt,
+			&menu.UpdatedAt,
+		)
+		if err != nil {
+			return nil, err
+		}
+
+		menus = append(menus, menu)
+	}
+
+	return menus, nil
+
+}

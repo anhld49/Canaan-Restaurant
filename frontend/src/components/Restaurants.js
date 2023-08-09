@@ -1,58 +1,51 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const ManageCatalogue = () => {
-    const [movies, setMovies] = useState([]);
-    const { jwtToken } = useOutletContext();
-    const navigate = useNavigate();
+const Restaurants = () => {
+    const [restaurants, setRestaurants] = useState([]);
 
     useEffect( () => {
-        if (jwtToken === "") {
-            navigate("/login");
-            return
-        }
         const headers = new Headers();
         headers.append("Content-Type", "application/json");
-        headers.append("Authorization", "Bearer " + jwtToken);
 
         const requestOptions = {
             method: "GET",
             headers: headers,
         }
 
-        fetch(`/admin/movies`, requestOptions)
+        fetch(`http://localhost:8080/restaurants`, requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                setMovies(data);
+                setRestaurants(data);
             })
             .catch(err => {
                 console.log(err);
             })
 
-    }, [jwtToken, navigate]);
+    }, []);
 
     return(
         <div>
-            <h2>Manage Catalogue</h2>
+            <h2>Restaurants</h2>
             <hr />
             <table className="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Movie</th>
-                        <th>Release Date</th>
-                        <th>Rating</th>
+                        <th>Index</th>
+                        <th>Name</th>
+                        <th>Address</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {movies.map((m) => (
+                    {restaurants.map((m) => (
                         <tr key={m.id}>
                             <td>
-                                <Link to={`/admin/movies/${m.id}`}>
-                                    {m.title}
+                                <Link to={`/restaurants/${m.id}`}>
+                                    {m.id}
                                 </Link>
                             </td>
-                            <td>{m.release_date}</td>
-                            <td>{m.mpaa_rating}</td>
+                            <td>{m.name}</td>
+                            <td>{m.address}</td>
                         </tr>    
                     ))}
                 </tbody>
@@ -61,4 +54,4 @@ const ManageCatalogue = () => {
     )
 }
 
-export default ManageCatalogue;
+export default Restaurants;

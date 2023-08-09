@@ -87,7 +87,7 @@ function App() {
     <div className="container">
       <div className="row">
         <div className="col">
-          <h1 className="mt-3">Go Watch a Movie!</h1>
+          <h1 className="mt-3">Canaan-Restaurant!</h1>
         </div>
         <div className="col text-end">
           {jwtToken === "" ? (
@@ -111,36 +111,24 @@ function App() {
                 Home
               </Link>
               <Link
-                to="/movies"
+                to="/restaurants"
                 className="list-group-item list-group-item-action"
               >
-                Movies
-              </Link>
-              <Link
-                to="/genres"
-                className="list-group-item list-group-item-action"
-              >
-                Genres
+                Restaurants
               </Link>
               {jwtToken !== "" && (
                 <>
                   <Link
-                    to="/admin/movie/0"
+                    to="/admin/orders"
                     className="list-group-item list-group-item-action"
                   >
-                    Add Movie
+                    Order List
                   </Link>
                   <Link
-                    to="/manage-catalogue"
+                    to="/admin/orders/create"
                     className="list-group-item list-group-item-action"
                   >
-                    Manage Catalogue
-                  </Link>
-                  <Link
-                    to="/graphql"
-                    className="list-group-item list-group-item-action"
-                  >
-                    GraphQL
+                    Create Order
                   </Link>
                 </>
               )}

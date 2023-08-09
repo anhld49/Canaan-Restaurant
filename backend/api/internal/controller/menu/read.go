@@ -36,3 +36,14 @@ func (c MenuController) Get(id int) (models.Menu, error) {
 
 	return data, nil
 }
+
+// GetMenuByRestaurantId: Get Menu By Restaurant Id
+func (c MenuController) GetMenuByRestaurantId(id int) ([]models.Menu, error) {
+	data, err := c.menuRepo.GetMenuByRestaurantId(id)
+
+	if err != nil {
+		return data, err
+	}
+
+	return data, nil
+}

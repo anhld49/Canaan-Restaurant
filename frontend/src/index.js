@@ -2,15 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
-import EditMovie from './components/EditMovie';
+import OrderList from './components/OrderList';
 import ErrorPage from './components/ErrorPage';
 import Genres from './components/Genres';
 import GraphQL from './components/GraphQL';
 import Home from './components/Home';
 import Login from './components/Login';
-import ManageCatalogue from './components/ManageCatalogue';
-import Movies from './components/Movies';
-import Movie from './components/Movie';
+import Restaurants from './components/Restaurants';
+import Menus from './components/Menus';
+import Dishes from './components/Dishes';
+import OrderDetails from './components/OrderDetails';
 
 const router = createBrowserRouter([
   {
@@ -20,24 +21,28 @@ const router = createBrowserRouter([
     children: [
       {index: true, element: <Home /> },
       {
-        path: "/movies",
-        element: <Movies />,
+        path: "/restaurants",
+        element: <Restaurants />,
       },
       {
-        path: "/movies/:id",
-        element: <Movie />,
+        path: "/restaurants/:id",
+        element: <Menus />,
+      },
+      {
+        path: "/dishes/:id",
+        element: <Dishes />,
       },
       {
         path: "/genres",
         element: <Genres />,
       },
       {
-        path: "/admin/movie/0",
-        element: <EditMovie />,
+        path: "/admin/orders",
+        element: <OrderList />,
       },
       {
-        path: "/manage-catalogue",
-        element: <ManageCatalogue />,
+        path: "/admin/orders/:id",
+        element: <OrderDetails />,
       },
       {
         path: "/graphql",
