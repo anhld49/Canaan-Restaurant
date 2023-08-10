@@ -28,6 +28,10 @@
 ## Underdevelopment Tasks:
 - Notification system
 
+Import Postman collection from this file:
+
+### /backend/api/pkg/postman/restaurant.postman_collection.json
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
