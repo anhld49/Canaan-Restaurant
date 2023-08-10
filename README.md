@@ -7,15 +7,16 @@
 3. Open a new tab in your terminal, then type `cd backend` then run `docker compose up --build`
 
 ## Account to test:
-Role: OWNER
+
+1. Role: OWNER
 Email Address: owner@example.com
 Password: secret
 
-Role: DRIVER
+2. Role: DRIVER
 Email Address: driver@example.com
 Password: secret
 
-Role: USER
+3. Role: USER
 Email Address: user@example.com
 Password: secret
 
