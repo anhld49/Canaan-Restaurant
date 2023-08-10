@@ -474,6 +474,58 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getMenuByRestaurantId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJleGFtcGxlLmNvbSIsImV4cCI6MTY5MTUwMzI4MiwiaWF0IjoxNjkxNTAyMzgyLCJpc3MiOiJleGFtcGxlLmNvbSIsIm5hbWUiOiJPd25lciBCb3NzIiwic3ViIjoiMSIsInR5cCI6IkpXVCJ9.40ZlKh3vUOvXf4wueP3iPY_oIcAQb6zz-jdsf5p06vk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/menus/getMenuByRestaurantId/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"menus",
+								"getMenuByRestaurantId",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDishesByMenuId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/dishes/getDishesByMenuId/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dishes",
+								"getDishesByMenuId",
+								"5"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -505,7 +557,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/dishes/2",
+							"raw": "http://localhost:8080/dishes/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -513,7 +565,7 @@
 							"port": "8080",
 							"path": [
 								"dishes",
-								"2"
+								"3"
 							]
 						}
 					},
@@ -522,6 +574,16 @@
 				{
 					"name": "Create dish",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJleGFtcGxlLmNvbSIsImV4cCI6MTY5MTU3NjA0MywiaWF0IjoxNjkxNTc1MTQzLCJpc3MiOiJleGFtcGxlLmNvbSIsIm5hbWUiOiJPV05FUiBCb3NzIiwic3ViIjoiMSIsInR5cCI6IkpXVCJ9.sZMdMycS2WKhNJSnUYr0hYbg3wk4iRKE3d5AATrhdH4",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -534,13 +596,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/dishes",
+							"raw": "http://localhost:8080/owner/dishes",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"owner",
 								"dishes"
 							]
 						}
@@ -562,13 +625,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/dishes/4",
+							"raw": "http://localhost:8080/owner/dishes/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"owner",
 								"dishes",
 								"4"
 							]
@@ -582,7 +646,28 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/dishes/4",
+							"raw": "http://localhost:8080/owner/dishes/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"owner",
+								"dishes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDishesByMenuId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/dishes/getDishesByMenuId/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -590,7 +675,8 @@
 							"port": "8080",
 							"path": [
 								"dishes",
-								"4"
+								"getDishesByMenuId",
+								"2"
 							]
 						}
 					},
@@ -609,7 +695,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJleGFtcGxlLmNvbSIsImV4cCI6MTY5MTQ4ODk5OSwiaWF0IjoxNjkxNDg4MDk5LCJpc3MiOiJleGFtcGxlLmNvbSIsIm5hbWUiOiJPd25lciBCb3NzIiwic3ViIjoiMSIsInR5cCI6IkpXVCJ9.xPTT11NSrU78jl5ltsRK3QmkjsUKT20oG7uNvVgQ4eM",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJleGFtcGxlLmNvbSIsImV4cCI6MTY5MTU0OTY5MSwiaWF0IjoxNjkxNTQ4NzkxLCJpc3MiOiJleGFtcGxlLmNvbSIsIm5hbWUiOiJPd25lciBCb3NzIiwic3ViIjoiMSIsInR5cCI6IkpXVCJ9.jpq2AqtDzArWV0nQuV9jKnOVKWMsIIVtnfsjz71rPlA",
 									"type": "string"
 								}
 							]
@@ -617,7 +703,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/admin/orders",
+							"raw": "http://localhost:8080/admin/orders/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -625,7 +711,8 @@
 							"port": "8080",
 							"path": [
 								"admin",
-								"orders"
+								"orders",
+								"1"
 							]
 						}
 					},
