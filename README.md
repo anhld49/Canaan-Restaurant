@@ -9,16 +9,16 @@
 ## Account to test:
 
 1. Role: OWNER
-Email Address: owner@example.com
-Password: secret
+- owner@example.com
+- secret
 
 2. Role: DRIVER
-Email Address: driver@example.com
-Password: secret
+- driver@example.com
+- secret
 
 3. Role: USER
-Email Address: user@example.com
-Password: secret
+- user@example.com
+- secret
 
 ## Completed Tasks:
 - User authentication and authorization
